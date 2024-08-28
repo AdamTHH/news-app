@@ -64,7 +64,7 @@ function App() {
             ))}
           </div>
           <div className="col-span-1">
-            <div className='background-pattern h-[200px]' />
+            <div className='background-pattern h-[200px] hidden md:block' />
             {popularNews.slice(6, 7).map((news, index) => (
               <NewsBlock key={index} section={news.section} date={news.date} likes={news.likes} comments={news.comments} dark>
                 {news.title}
