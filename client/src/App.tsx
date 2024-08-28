@@ -13,7 +13,7 @@ import { LuRefreshCw } from "react-icons/lu";
 function App() {
   const [popularNews, setPopularNews] = useState<News[]>([]);
 
-  function logNews () {
+  function logNews() {
     console.log(popularNews)
   }
 
