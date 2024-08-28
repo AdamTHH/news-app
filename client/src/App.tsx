@@ -46,13 +46,39 @@ function App() {
           ))}
         </div>
 
-        <div id="midsection" className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-          {/*ha pl a popularNews népszerűségi sorrendben van, akkor lehet a splice 5-7 ig (mert ide kevésbé fontos hírek jönnek) */}
-          {popularNews.slice(4, 6).map((news, index) => (
-            <NewsBlock key={index} section={news.section} date={news.date} likes={news.likes} comments={news.comments} dark>
-              {news.title}
-            </NewsBlock>
-          ))}
+        <div id="midsection" className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-14'>
+          <div className="col-span-1">
+            <div className='background-pattern h-[500px] hidden md:block' />
+            {popularNews.slice(4, 5).map((news, index) => (
+              <NewsBlock key={index} section={news.section} date={news.date} likes={news.likes} comments={news.comments} dark>
+                {news.title}
+              </NewsBlock>
+            ))}
+          </div>
+          <div className="col-span-1">
+            <div className='background-pattern h-[500px] hidden md:block' />
+            {popularNews.slice(5, 6).map((news, index) => (
+              <NewsBlock key={index} section={news.section} date={news.date} likes={news.likes} comments={news.comments} dark>
+                {news.title}
+              </NewsBlock>
+            ))}
+          </div>
+          <div className="col-span-1">
+            <div className='background-pattern h-[200px]' />
+            {popularNews.slice(6, 7).map((news, index) => (
+              <NewsBlock key={index} section={news.section} date={news.date} likes={news.likes} comments={news.comments} dark>
+                {news.title}
+              </NewsBlock>
+            ))}
+            <div className='background-pattern h-[300px]'>
+              {popularNews.slice(7, 8).map((news, index) => (
+                <NewsBlock key={index} section={news.section} date={news.date} likes={news.likes} comments={news.comments}>
+                  {news.title}
+                </NewsBlock>
+              ))}
+            </div>
+          </div>
+
         </div>
 
 
@@ -60,7 +86,7 @@ function App() {
           className="bg-red-500 p-5 rounded-full absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           onClick={logNews}
         >
-          <LuRefreshCw />
+          <LuRefreshCw className='text-white text-2xl' />
         </button>
 
 

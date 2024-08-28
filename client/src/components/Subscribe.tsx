@@ -65,7 +65,7 @@ const Subscribe = () => {
                 </DialogHeader>
                 <form className="grid gap-4 py-4 w-96" onSubmit={handleSubmit}>
                     <DialogDescription className="nofont saira">
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+                        Ide valós emailt írj (valami@valami.com)
                     </DialogDescription>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Input
