@@ -1,3 +1,4 @@
+import { ImageSliderItem } from "../../Interfaces";
 import {
   Carousel,
   CarouselContent,
@@ -7,24 +8,29 @@ import {
 } from "../components/ui/carousel"
 
 const ImageSlider = () => {
+  const images: ImageSliderItem[] = Array.from({ length: 18 }, (_, index) => ({
+    src: "https://picsum.photos/200",
+    title: `Image ${index + 1}`,
+    description: `desc`,
+  }))
+
   return (
     <Carousel className="w-[70vw] mx-auto">
       <CarouselContent className="-ml-1">
-        {Array.from({ length: 10 }).map((_, index) => (
+        {images.map((image, index) => (
           <CarouselItem key={index} className=" lg:basis-1/3">
             <div className="p-1 select-none">
               <div className="flex flex-col items-center">
-                <span className="text-xl mb-2">Image title</span>
-                <img src="https://picsum.photos/200" className="mx-auto" />
+                <span className="text-xl mb-2">{image.title}</span>
+                <img src={image.src} className="mx-auto" alt={image.description || ""} />
               </div>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="text-black rounded-none" />
-      <CarouselNext className="text-black rounded-none"/>
+      <CarouselPrevious className="text-black rounded-none h-12" />
+      <CarouselNext className="text-black rounded-none h-12"/>
     </Carousel>
   )
 }
-
 export default ImageSlider;

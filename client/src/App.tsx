@@ -5,24 +5,62 @@ import { FaComment } from "react-icons/fa";
 import NewsBlock from './components/NewsBlock';
 import ImageSlider from './components/ImageSlider';
 import { Promotion } from './components/Promotion';
+import { News } from '../Interfaces';
 
 
 function App() {
+  const [popularNews, setPopularNewss] = useState<News[]>([
+    {
+      section: "sport",
+      date: "August 6, 2023",
+      title: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem",
+      comments: 20,
+      likes: 2000
+    },
+    {
+      section: "politics",
+      date: "October 6, 2123",
+      title: "et quasi architectso beatae vitae dicta sunt explicabo. Nemo e",
+      comments: 22,
+      likes: 3123
+    },
+    {
+      section: "money",
+      date: "July 12, 2013",
+      title: "ipsam voluptatem quia voluptas sit aspernatur aut odi",
+      comments: 3,
+      likes: 212
+    },
+    {
+      section: "world",
+      date: "November 12, 2323",
+      title: "US flag raised over embassy of cuba",
+      comments: 20,
+      likes: 2000
+    },
+  ]);
+
+
   return (
     <div className='bg-white'>
-      <Navbar />
+      <Navbar popularNews={popularNews} />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="background-pattern text-white pt-32 grid grid-cols-1 sm:grid-cols-2 gap-20">
-          <NewsBlock section="sport" date="August 6, 2023" comments={20} likes={2000}>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          </NewsBlock>
-          <NewsBlock section="politics" date="October 6, 2123" comments={22} likes={3123}>
-            et quasi architectso beatae vitae dicta sunt explicabo. Nemo e
-          </NewsBlock>
-          <NewsBlock section="money" date="July 12, 2013" comments={3} likes={212}>
-            ipsam voluptatem quia voluptas sit aspernatur aut odi
-          </NewsBlock>
+        <div id="big-news" className="background-pattern text-white pt-32 grid grid-cols-1 sm:grid-cols-2 gap-20">
+          {popularNews.map((news, index) => (
+            <NewsBlock key={index} section={news.section} date={news.date} likes={news.likes} comments={news.comments}>
+              {news.title}
+            </NewsBlock>
+          ))}
+        </div>
+
+        <div id="midsection" className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+          {/*ha pl a popularNews népszerűségi sorrendben van, akkor lehet a splice 5-7 ig (mert ide kevésbé fontos hírek jönnek) */}
+          {popularNews.slice(0, 3).map((news, index) => (
+            <NewsBlock key={index} section={news.section} date={news.date} likes={news.likes} comments={news.comments} dark>
+              {news.title}
+            </NewsBlock>
+          ))}
         </div>
 
         <div className="relative left-[50%] right-[50%] mx-[-50vw] w-screen mt-32">
@@ -44,6 +82,40 @@ function App() {
           </p>
         </div>
       </div>
+
+
+      <footer className="bg-slate-900 text-white py-8 mt-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div>
+              <h3 className="text-lg font-semibold mb-4">About Us</h3>
+              <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac ex id lorem auctor sodales vel ut urna.</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+              <ul className="text-sm">
+                <li className="mb-2"><a href="#" className="hover:text-gray-300">Home</a></li>
+                <li className="mb-2"><a href="#" className="hover:text-gray-300">News</a></li>
+                <li className="mb-2"><a href="#" className="hover:text-gray-300">Sports</a></li>
+                <li className="mb-2"><a href="#" className="hover:text-gray-300">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+              <div className="flex space-x-4">
+                <a href="#" className="text-white hover:text-gray-300">
+                  <FaComment className="w-6 h-6" />
+                </a>
+                {/* Add more social icons here */}
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm">
+            <p>2015 © Company Name. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+
 
     </div>
   )

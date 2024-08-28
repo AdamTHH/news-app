@@ -35,6 +35,9 @@ const Subscribe = () => {
         .catch((error) => {
             console.log(error)
             setSubscriptionState('outline outline-red-600')
+            setTimeout(() => {
+                setSubscriptionState('')
+            }, 1000);
         })
     }
 
@@ -48,9 +51,9 @@ const Subscribe = () => {
                     <DialogTitle className="text-4xl">NEWSLETTER SIGNUP</DialogTitle>
                 </DialogHeader>
                 <form className="grid gap-4 py-4 w-96" onSubmit={handleSubmit}>
-                    <p className="nofont saira">
+                    <DialogDescription className="nofont saira">
                         At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-                    </p>
+                    </DialogDescription>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Input
                             id="email"
