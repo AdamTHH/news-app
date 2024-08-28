@@ -22,6 +22,19 @@ const Subscribe = () => {
         if (email === '') {
             return;
         }
+
+        const isValidEmail = (email: string) => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }        
+        if (!isValidEmail(email)) {
+            setSubscriptionState('outline outline-red-600')
+            setTimeout(() => {
+                setSubscriptionState('')
+            }, 1000);
+            return;
+        }
+        
         
         axios.post('/api/add_user', { email })
         .then(() => {

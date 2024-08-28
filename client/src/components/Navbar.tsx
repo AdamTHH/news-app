@@ -16,6 +16,7 @@ import { News } from "../../Interfaces";
 import NewsBlock from "./NewsBlock";
 import { ScrollArea } from "../components/ui/scroll-area"
 import { CiClock1 } from "react-icons/ci";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 
 const Navbar = ({ popularNews }: { popularNews: News[] }) => {
@@ -57,15 +58,33 @@ const NavbarLink = ({ children }: any) => {
 };
 
 const LeftDrawer = ({ popularNews }: { popularNews: News[] }) => {
+
+  const asd = () => {
+    return(
+      Object.entries(
+        popularNews.reduce((acc, news) => {
+          acc[news.section] = (acc[news.section] || 0) + 1;
+          return acc;
+        }, {} as Record<string, number>)
+      ).map(([section, count]) => (
+        <div key={section} className="flex justify-between items-center py-2 px-4">
+          <span className="text-sm font-medium">{section}</span>
+          <span className="text-sm text-gray-500">{count}</span>
+        </div>
+      ))
+    )
+  }
+
   return (
     <Drawer modal={false} direction="left" dismissible={false}>
       <DrawerTrigger><GiHamburgerMenu size={25} className="mx-4" /></DrawerTrigger>
+      <DialogDescription className="hidden"/>
       <DrawerContent>
         <ScrollArea>
 
           <DrawerTitle className="m-4 text-2xl">Popular News</DrawerTitle>
           <div className="background-pattern">
-            {popularNews.map((news, index) => (
+            {popularNews.splice(0, 4).map((news, index) => (
               <NewsBlock key={index} section={news.section} date={news.date} likes={news.likes} comments={news.comments}>
                 {news.title}
               </NewsBlock>
@@ -77,21 +96,12 @@ const LeftDrawer = ({ popularNews }: { popularNews: News[] }) => {
           <DrawerTitle className="m-4 text-2xl">Categories</DrawerTitle>
 
           {/* AI */}
-          {Object.entries(
-            popularNews.reduce((acc, news) => {
-              acc[news.section] = (acc[news.section] || 0) + 1;
-              return acc;
-            }, {} as Record<string, number>)
-          ).map(([section, count]) => (
-            <div key={section} className="flex justify-between items-center py-2 px-4">
-              <span className="text-sm font-medium">{section}</span>
-              <span className="text-sm text-gray-500">{count}</span>
-            </div>
-          ))}
+          {asd()}
 
         </ScrollArea>
       </DrawerContent>
     </Drawer>
   )
 }
+
 export default Navbar;

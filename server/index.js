@@ -17,8 +17,8 @@ const db = mysql.createConnection({
 });
 
 app.post('/api/add_user', (req, res) => {
-  sql = 'INSERT INTO `users`(`email`) VALUES (?)';
-  params = [
+  const sql = 'INSERT INTO `users`(`email`) VALUES (?)';
+  const params = [
     req.body.email,
   ];
 
@@ -29,6 +29,15 @@ app.post('/api/add_user', (req, res) => {
     } else {
       res.status(200).json({ message: 'User registered successfully' });
     }
+  });
+});
+
+app.get('/api/get_news', (req, res) => {
+  const sql = 'SELECT * FROM news';
+
+  db.query(sql, (err, result) => {
+    if (err) res.status(500).json({ message: 'Error fetching news' });
+    return res.status(200).json(result);
   });
 });
 
